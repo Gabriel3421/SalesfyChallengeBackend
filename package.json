@@ -2,11 +2,11 @@
 	"name": "salesfy-challenge-backend",
 	"version": "1.0.0",
 	"description": "",
-	"main": "js/app.js",
+	"main": "js/src/server.js",
 	"scripts": {
-		"start": "tsc && node js/app.js",
+		"start": "tsc && node js/src/server.js",
 		"test": "nodemon --watch . --ext ts --exec \"mocha --timeout 15000 -r ts-node/register tests/**/*.test.ts\"",
-		"start:watch": "nodemon js/app.js",
+		"start:watch": "nodemon js/src/server.js",
 		"compile-watch": "sudo yarn tsc --p tsconfig.json -w"
 	},
 	"keywords": [],

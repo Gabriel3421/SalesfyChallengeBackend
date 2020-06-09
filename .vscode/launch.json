@@ -9,7 +9,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch Challenge Backend",
-			"program": "${workspaceFolder}/js/app.js",
+			"program": "${workspaceFolder}/js/src/server.js",
 			"runtimeArgs": [
 				"test"
 			],
