@@ -6,13 +6,15 @@
         "noImplicitAny": true,
         "removeComments": true,
         "module": "commonjs",
+        "esModuleInterop": true,
         "strictNullChecks": true,
 		"inlineSourceMap": true,
 		"experimentalDecorators": true,
         "sourceMap": false,
 		"skipLibCheck": true,
 		"types": [
-            "node"
+            "node",
+            "mocha"
         ],
         "typeRoots": [
             "node_modules/@types"
