@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 class TranslateController {
-  
+
   async index(request: Request, response: Response) {
 
   const base_numbers = [
@@ -51,7 +51,7 @@ class TranslateController {
       ' OCTILLION ',
       ' NONILLION ',
     ]
-      
+
   function handleTranslate (num: string){
       let translated = ''
       for (let i = 2; i >= 0; i--) {
