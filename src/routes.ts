@@ -12,3 +12,5 @@ routes.get('/', TranslateController.index);
 
 
 export default routes;
+
+
