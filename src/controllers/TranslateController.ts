@@ -84,6 +84,9 @@ class TranslateController {
   if(isNaN(Number(number))){
     return response.status(400).json({ error: 'Only Digits are permitted. Ex.:003 or 123123'});
   }
+  if(!Number.isInteger(Number(number))){
+    return response.status(400).json({ error: 'Number must be intenger.'});
+  }
   if(Number(number) > 1000000000000000000000000000000){
     return response.status(400).json({ error: 'Only Number < 999 nonillion are permitted.'});
   }
