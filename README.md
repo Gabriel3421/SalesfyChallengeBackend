@@ -21,6 +21,7 @@ Executando o projeto
 ```
 sudo yarn nodemon
 ```
+Obs: Porta usada foi 3002
 
 Rodando os testes
 
@@ -31,12 +32,27 @@ OBS:
 Para rodar corretamente com maior produtividade para desenvolvimento, rode em terminais diferentes os seguintes comandos:
 
 $ sudo yarn compile-watch
--- Este comando é responsável por manter seu typescript sendo compilado a cada save. Você pode acompanhar neste terminal qualquer erro de escrita no seu programa.
+* Este comando é responsável por manter seu typescript sendo compilado a cada save. Você pode acompanhar neste terminal qualquer erro de escrita no seu programa.
 
 $ sudo yarn nodemon
--- A cada compilação bem sucedida, o Backend lança novamente e automaticamente uma nova versão no ar. Mantendo a execução sempre com a versão mais atualizada do código.
+* A cada compilação bem sucedida, o Backend lança novamente e automaticamente uma nova versão no ar. Mantendo a execução sempre com a versão mais atualizada do código.
 
 Caso esteja usando vsCode, é recomendado o uso da execução com debug, o que pode ser alcançado via arquivo launch.json. Em posse do arquivo, execute no vsCode o botão F5.
+
+## Exemplo de uso
+
+  Após ter iniciado o servidor abra seu navegador e digite
+
+  ```
+  http://localhost:3002/?translate=1000
+  ```
+  no exemplo acima temos representado 1000 mas pode ser qualquer número entre 0 e 999 nonilhões
+
+## Decisões/Detalhes de implementação
+
+* Por motivos de maior facilidade de implementação, quando os números são recebidos eles sao quebrados de 3 em 3 para a classificação por unidade, dezena e centenas; após essa classificação ele passa pela classificação de unidades de milhar, milhões e etc.
+
+* Por escolha minha o maior número possível foi de 999 nonilhões, pois considerei que abrangeria a maioria dos casos em que os usuários poderiam ter interesse.
 
 
 ## Construido com
