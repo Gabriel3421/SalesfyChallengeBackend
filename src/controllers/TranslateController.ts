@@ -79,7 +79,7 @@ class TranslateController {
   }
 
   const { translate } = request.query;
-  const number = String(translate);
+  let number = String(translate);
 
   if(isNaN(Number(number))){
     return response.status(400).json({ error: 'Only Digits are permitted. Ex.:003 or 123123'});
@@ -91,9 +91,10 @@ class TranslateController {
     return response.status(400).json({ error: 'Only Number < 999 nonillion are permitted.'});
   }
   let translated = ''
-  const digits = Number(number.length);
-  if(!Number.isInteger(digits/3)){
-    return response.status(400).json({ error: 'digits must be multiple of 3. Ex.: 003 or 123123 '});
+  let digits = Number(number.length);
+  while(!Number.isInteger(digits/3)){
+    number = '0'+number;
+    digits = Number(number.length);
   }
   let cdu = ''
   let magnitude = digits/3 -1
