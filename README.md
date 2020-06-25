@@ -6,20 +6,20 @@ Projeto de backend para dado uma requisição via query params de um numero, é 
 
 ### Pré-requisitos
 
-Para usar vc precisará ter o node instalado na sua maquina, bem como o yarn, mas os comandos também podem ser executados usando o npm. Também o uso de uma maquina tendo como sistema operacional de base Linux.
+Para usar vc precisará ter o node instalado na sua maquina, bem como o yarn, mas os comandos também podem ser executados usando o npm. Também o uso de uma maquina tendo como sistema operacional de base Linux e Node versão 12.18.1.
 
 ### Instalação
 
 Instalando dependências
 
 ```
-yarn ou npm install
+yarn
 ```
 
 Executando o projeto
 
 ```
-sudo yarn nodemon
+sudo yarn start
 ```
 Obs: Porta usada foi 3002
 

@@ -1,115 +1,35 @@
 import { Request, Response } from 'express';
+import handleTranslate from '../service/translate'
+
+function handleVerification(number: number, response: Response){
+  const oneDecillion = 1000000000000000000000000000000000;
+  if(isNaN(number)){
+    return response.status(400).json({ error: 'Only Digits are permitted. Ex.:003 or 123123'});
+  }
+  if(!Number.isInteger(number)){
+    return response.status(400).json({ error: 'Number must be a positive intenger.'});
+  }
+  if(number < 0){
+    return response.status(400).json({ error: 'Only positive Number are permitted.'});
+  }
+  if(number > oneDecillion){
+    return response.status(400).json({ error: 'Only Number < 999 nonillion are permitted.'});
+  }
+}
 
 class TranslateController {
 
   async index(request: Request, response: Response) {
 
-  const base_numbers = [
-      'ZERO',
-      'ONE',
-      'TWO',
-      'THREE',
-      'FOUR',
-      'FIVE',
-      'SIX',
-      'SEVEN',
-      'EIGHT',
-      'NINE',
-      'TEN',
-      'ELEVEN',
-      'TWELVE',
-      'TRIRTEEN',
-      'FOURTEEN',
-      'FIFTEEN',
-      'SIXTEEN',
-      'SEVENTENN',
-      'EIGHTEEN',
-      'NINETEEN'
-    ]
-  const dozens = [
-      '',
-      '',
-      'TWENTY',
-      'THIRTY',
-      'FORTY',
-      'FIFTY',
-      'SIXTY',
-      'SEVENTY',
-      'EIGHTY',
-      'NINETY'
-    ]
-  const order_of_magnitude = [
-      '',
-      ' THOUSAND ',
-      ' MILLION ',
-      ' BILLION ',
-      ' TRILLION ',
-      ' QUADRILLION ',
-      ' QUINTILLION ',
-      ' SEXTILLION ',
-      ' SEPTILLION ',
-      ' OCTILLION ',
-      ' NONILLION ',
-    ]
+    console.log('Request logged:', request.method, request.path, request.query)
 
-  function handleTranslate (num: string){
-      let translated = ''
-      for (let i = 2; i >= 0; i--) {
-        if(i === 2){
-          translated = base_numbers[Number(num[i])] + translated
-        }
-        if(i === 1){
-          if(num[1] === '1'){
-            translated = ''
-            translated = base_numbers[Number(num[i]+num[i+1])] + translated
-          }
-          if(num[1] !== '1' && num[2] === '0'){
-            translated = ''
-            translated = dozens[Number(num[1])] + translated
-          }
-          if(num[1] !== '1' && num[1] !== '0' && num[2] !== '0'){
-            translated = dozens[Number(num[1])]+"-" + translated
-          }
-        }
-        if(i === 0 && num[0] !== '0'){
-          translated = base_numbers[Number(num[i])]+' HUNDRED '+ translated
-        }
-      }
-      return translated;
-  }
+    const { translate } = request.query;
 
-  const { translate } = request.query;
-  let number = String(translate);
+    handleVerification(Number(translate), response)
 
-  if(isNaN(Number(number))){
-    return response.status(400).json({ error: 'Only Digits are permitted. Ex.:003 or 123123'});
-  }
-  if(!Number.isInteger(Number(number))){
-    return response.status(400).json({ error: 'Number must be intenger.'});
-  }
-  if(Number(number) < 0){
-    return response.status(400).json({ error: 'Only positive Number are permitted.'});
-  }
-  if(Number(number) > 1000000000000000000000000000000){
-    return response.status(400).json({ error: 'Only Number < 999 nonillion are permitted.'});
-  }
-  let translated = ''
-  let digits = Number(number.length);
-  while(!Number.isInteger(digits/3)){
-    number = '0'+number;
-    digits = Number(number.length);
-  }
-  let cdu = ''
-  let magnitude = digits/3 -1
-  for (let i = 0; i <= digits; i++) {
-    if (i%3 === 0 && i!== 0){
-      translated += handleTranslate(cdu) + order_of_magnitude[magnitude]
-      magnitude--
-      cdu=''
-    }
-    cdu += number[i]
-  }
-    return response.status(200).json({translated});
+    let translated = handleTranslate(String(translate));
+
+    return response.status(200).json({ translated });
   }
 }
 
